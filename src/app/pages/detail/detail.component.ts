@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, tap } from 'rxjs';
+import { Card } from 'src/app/interfaces/card.interface';
+import { CardService } from 'src/app/services/card.service';
 
 @Component({
   selector: 'app-detail',
@@ -7,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailComponent implements OnInit {
 
-  constructor() { }
+  id!: string;
+  card$!: Observable<Card>;
+
+  constructor(private route: ActivatedRoute, private cardService: CardService) { }
 
   ngOnInit(): void {
+    this.id=this.route.snapshot.paramMap.get('id') || '';
+    // this.cardService.getCard(this.id).subscribe(res => {
+    //   console.log('detalle carta seleccionada', res);
+    // });
+    // this.card$ = this.cardService.getCard(this.id);
+    this.card$ = this.cardService.getCard(this.id).pipe(tap(console.log));
   }
 
 }

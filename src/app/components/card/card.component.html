@@ -1,1 +1,10 @@
-<p>card works!</p>
+<!-- <p>card works!</p> -->
+
+<div class="ygo-card" (click)="goToCard()">
+  <!-- <img
+    src="https://images.ygoprodeck.com/images/cards/1861629.jpg"
+    alt=""> -->
+  <img
+    [src]="card.card_images[0].image_url"
+    alt="">
+</div>
